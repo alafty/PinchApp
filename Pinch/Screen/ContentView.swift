@@ -70,6 +70,47 @@ struct ContentView: View {
                 .padding(.horizontal),
             alignment: .top
             )
+            .overlay(
+                HStack{
+                    Button {
+                        withAnimation(.spring()){
+                            if imageScale > 1 {
+                                imageScale -= 1
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "minus.magnifyingglass")
+                            .font(.system(size: 32))
+                    }
+                    Button {
+                        withAnimation(.spring()){
+                            resetImage()
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                            .font(.system(size: 32))
+                    }
+                    Button {
+                        withAnimation(.spring()){
+                            if imageScale < 5 {
+                                imageScale += 1
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus.magnifyingglass")
+                            .font(.system(size: 32))
+                    }
+                    
+                }
+                    .padding(EdgeInsets(top: 12, leading: 20, bottom: 12, trailing: 20))
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(10)
+                    .opacity(isAnimating ? 1 : 0)
+                    .animation(.linear(duration: 1), value: isAnimating)
+                    
+                ,alignment: .bottom
+            )
+            
         }
         .navigationViewStyle(.stack)
     }
